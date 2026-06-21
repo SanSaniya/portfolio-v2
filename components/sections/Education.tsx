@@ -1,120 +1,94 @@
 import { GraduationCap, Calendar, Award } from "lucide-react";
 
+const education = [
+  {
+    status: "Currently Pursuing",
+    title: "B.Tech Computer Science",
+    institute: "Govt. Women Institute of Technology",
+    location: "Dehradun, Uttarakhand",
+    duration: "2022 - 2026",
+    score: "CGPA 8.04",
+    current: true,
+  },
+  {
+    status: "Completed",
+    title: "Class XII (UK Board)",
+    institute: "Durga Modern Inter College",
+    location: "Haridwar, Uttarakhand",
+    duration: "2021",
+    score: "88.2%",
+    current: false,
+  },
+  {
+    status: "Completed",
+    title: "Class X (UK Board)",
+    institute: "Durga Modern Inter College",
+    location: "Haridwar, Uttarakhand",
+    duration: "2019",
+    score: "89%",
+    current: false,
+  },
+];
+
 export default function Education() {
   return (
     <section
       id="education"
-      className="relative min-h-screen px-6 py-24 text-white bg-white/5 backdrop-blur-sm"
+      className="relative bg-white/5 px-6 py-24 text-white backdrop-blur-sm"
     >
       <div className="mx-auto max-w-6xl">
-        <h2 className="mb-24 text-center text-5xl font-bold">
+        <h2 className="mb-20 text-center text-4xl font-bold md:text-5xl">
           Educational <span className="text-purple-400">Journey</span>
         </h2>
 
         <div className="relative">
-          {/* CENTER LINE */}
-          <div className="absolute left-1/2 top-0 h-full w-[2px] -translate-x-1/2 bg-purple-500/30" />
+          {/* Timeline */}
+          <div className="absolute left-4 top-0 h-full w-[2px] bg-purple-500/30 lg:left-1/2 lg:-translate-x-1/2" />
 
-          {/* ITEM 1 */}
-          <div className="relative mb-28 flex items-center justify-between">
-            {/* LEFT EMPTY */}
-            <div className="w-[45%]" />
+          <div className="space-y-16">
+            {education.map((item, index) => (
+              <div
+                key={item.title}
+                className={`relative flex ${
+                  index % 2 === 0 ? "lg:justify-end" : "lg:justify-start"
+                }`}
+              >
+                {/* Dot */}
+                <div className="absolute left-4 top-10 h-5 w-5 -translate-x-1/2 rounded-full border-4 border-white bg-purple-500 lg:left-1/2" />
 
-            {/* DOT */}
-            <div className="absolute left-1/2 h-6 w-6 -translate-x-1/2 rounded-full border-4 border-white bg-purple-500" />
+                {/* Card */}
+                <div className="ml-10 w-full lg:ml-0 lg:w-[45%]">
+                  <div className="rounded-3xl border border-purple-500/30 bg-white/5 p-5 backdrop-blur-md transition duration-300 hover:border-purple-400 hover:bg-white/10 md:p-6 lg:p-8">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-purple-500/20 px-4 py-2 text-xs text-purple-300 md:text-sm">
+                      {item.current && <GraduationCap size={15} />}
+                      {item.status}
+                    </div>
 
-            {/* CARD */}
-            <div className="w-[45%]">
-              <div className="rounded-3xl border border-purple-500/30 bg-white/5 p-8 backdrop-blur-md">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-purple-500/20 px-4 py-2 text-sm text-purple-300">
-                  <GraduationCap size={16} />
-                  Currently Pursuing
-                </div>
+                    <h3 className="mb-3 text-xl font-semibold md:text-2xl lg:text-3xl">
+                      {item.title}
+                    </h3>
 
-                <h3 className="mb-4 text-3xl font-semibold">
-                  B.Tech Computer Science
-                </h3>
+                    <p className="text-purple-300">{item.institute}</p>
 
-                <p className="text-purple-300">
-                  Govt. Women Institute of Technology
-                </p>
+                    <p className="mt-2 text-sm text-zinc-400 md:text-base">
+                      {item.location}
+                    </p>
 
-                <p className="mt-2 text-zinc-400">Dehradun, Uttarakhand</p>
+                    <div className="mt-5 flex flex-wrap gap-4 text-sm md:text-base">
+                      <span className="flex items-center gap-2 text-zinc-400">
+                        <Calendar size={16} />
+                        {item.duration}
+                      </span>
 
-                <div className="mt-4 flex gap-6 text-zinc-400">
-                  <span className="flex items-center gap-2">
-                    <Calendar size={18} />
-                    2022 - 2026
-                  </span>
-
-                  <span className="flex items-center gap-2 text-green-400">
-                    <Award size={18} />
-                    CGPA 8.04
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* ITEM 2 */}
-          <div className="relative mb-28 flex items-center justify-between">
-            {/* CARD LEFT */}
-            <div className="w-[45%]">
-              <div className="rounded-3xl border border-purple-500/30 bg-white/5 p-8 backdrop-blur-md">
-                <div className="mb-4 inline-flex rounded-full bg-purple-500/20 px-4 py-2 text-sm text-purple-300">
-                  Completed
-                </div>
-
-                <h3 className="mb-4 text-3xl font-semibold">
-                  Class XII (UK Board)
-                </h3>
-
-                <p className="text-purple-300">Durga Moder Inter College</p>
-
-                <p className="mt-2 text-zinc-400">Haridwar, Uttarakhand</p>
-
-                <div className="mt-4 flex gap-6">
-                  <span className="text-zinc-400">2021</span>
-
-                  <span className="text-green-400">88.2%</span>
+                      <span className="flex items-center gap-2 text-green-400">
+                        <Award size={16} />
+                        {item.score}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* DOT */}
-            <div className="absolute left-1/2 h-6 w-6 -translate-x-1/2 rounded-full border-4 border-white bg-purple-500" />
-
-            {/* EMPTY */}
-            <div className="w-[45%]" />
-          </div>
-
-          {/* ITEM 3 */}
-          <div className="relative flex items-center justify-between">
-            <div className="w-[45%]" />
-
-            <div className="absolute left-1/2 h-6 w-6 -translate-x-1/2 rounded-full border-4 border-white bg-purple-500" />
-
-            <div className="w-[45%]">
-              <div className="rounded-3xl border border-purple-500/30 bg-white/5 p-8 backdrop-blur-md">
-                <div className="mb-4 inline-flex rounded-full bg-purple-500/20 px-4 py-2 text-sm text-purple-300">
-                  Completed
-                </div>
-
-                <h3 className="mb-4 text-3xl font-semibold">
-                  Class X (UK Board)
-                </h3>
-
-                <p className="text-purple-300">Durga Modern Inter College</p>
-
-                <p className="mt-2 text-zinc-400">Haridwar, Uttarakhand</p>
-
-                <div className="mt-4 flex gap-6">
-                  <span className="text-zinc-400">2019</span>
-
-                  <span className="text-green-400">89%</span>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

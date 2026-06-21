@@ -1,9 +1,30 @@
+"use client";
+
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+
 export default function Navbar() {
-  const navItems = ["About", "Skills", "Projects", "Contact"];
+  const navItems = [
+    "About",
+    "Skills",
+    "Education",
+    "Experience",
+    "Projects",
+    "Achievements",
+    "Contact",
+  ];
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="absolute top-6 left-1/2 z-50 w-[90%] max-w-5xl -translate-x-1/2">
-      <div className="flex items-center justify-between rounded-full border border-white/10 bg-black/80 px-3 py-3 shadow-2xl backdrop-blur-md">
+    <nav className="fixed top-6 left-1/2 z-[100] w-[94%] max-w-5xl -translate-x-1/2">
+      <div
+        className="flex 
+    bg-white/5
+    px-3
+    py-2
+    backdrop-blur-xl items-center justify-between rounded-full border border-white/10  shadow-2xl "
+      >
         {/* Logo */}
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-black">
           <span>
@@ -23,21 +44,51 @@ export default function Navbar() {
         </div>
 
         {/* Nav Links */}
-        <ul className="hidden md:flex items-center gap-10 text-sm font-medium text-white">
+        <ul className="hidden md:flex items-center gap-10 text-sm font-medium tracking-wide text-white">
           {navItems.map((item) => (
             <li
               key={item}
               className="cursor-pointer transition-colors duration-300 hover:text-yellow-300"
             >
-              {item}
+              <a
+                href={`#${item.toLowerCase()}`}
+                className="
+      rounded-full
+      px-5
+      py-2.5
+      text-[15px]
+      font-medium
+      tracking-tight
+      text-zinc-300
+      transition-all
+      duration-300
+      hover:bg-white
+      hover:text-black
+      hover:shadow-lg
+    "
+              >
+                {item}
+              </a>
             </li>
           ))}
         </ul>
 
-        {/* CTA / Email Button */}
+        {/*Email Button */}
         <a
           href="mailto:saniyamlk1111@gmail.com"
-          className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-transform duration-300 hover:scale-105"
+          className="
+hidden
+md:flex
+rounded-full
+bg-white
+px-6
+py-3
+text-sm
+font-medium
+text-black
+transition-transform
+duration-300
+hover:scale-105"
         >
           <span>
             <svg
@@ -51,7 +102,60 @@ export default function Navbar() {
             </svg>
           </span>
         </a>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="
+  flex
+  md:hidden
+  h-12
+  w-12
+  items-center
+  justify-center
+  rounded-full
+  bg-white
+  text-black
+  "
+        >
+          {isOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </div>
+      {isOpen && (
+        <div
+          className="
+    mt-4
+    rounded-3xl
+    border
+    border-white/10
+    bg-black/80
+    backdrop-blur-xl
+    p-4
+    md:hidden
+    "
+        >
+          <ul className="flex flex-col gap-2">
+            {navItems.map((item) => (
+              <li key={item}>
+                <a
+                  href={`#${item.toLowerCase()}`}
+                  onClick={() => setIsOpen(false)}
+                  className="
+            block
+            rounded-xl
+            px-4
+            py-3
+            text-zinc-300
+            transition
+            hover:bg-white
+            hover:text-black
+            "
+                >
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </nav>
   );
 }
